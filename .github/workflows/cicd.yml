@@ -16,8 +16,16 @@ jobs:
       # Hier doe ik nog iets met caching...
       - name: Install composer dependencies
         run: composer install
+      - name: Cache composer shizzle
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Validate php code style
         run: composer lint:check
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
   build:
     needs: [analyse]
