@@ -43,8 +43,8 @@ jobs:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: test
-    services:
-      mariadb:
+    # services:
+      # mariadb:
       # Ik ga niet alles gratis weggeven
     steps:
       - uses: actions/checkout@v2
